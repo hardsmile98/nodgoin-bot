@@ -49,7 +49,7 @@ const checkRef = async (payload: string, user: UserEntity) => {
         return false
       }
     } else {
-      if (refsCount > 2) {
+      if (refsCount >= 3) {
         return false
       }
     }

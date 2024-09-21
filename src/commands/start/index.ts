@@ -4,6 +4,7 @@ import { UserRepository } from '../../db'
 import type UserEntity from '../../db/entity/user.entity'
 import checkRef from './checkRef'
 import checkSquad from './checkSquad'
+import downloadAvatar from './downloadAvatar'
 
 const start = () => async (ctx: Context) => {
   try {
@@ -26,7 +27,7 @@ const start = () => async (ctx: Context) => {
       }
 
       if (!user.image) {
-        console.log('saved image')
+        downloadAvatar(ctx, user)
       }
 
       if ('payload' in ctx && typeof ctx.payload === 'string') {

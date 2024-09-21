@@ -28,7 +28,7 @@ const checkRef = async (payload: string, user: UserEntity) => {
       return false
     }
 
-    if (count > refLink.count) {
+    if (count >= refLink.count) {
       return false
     }
 
@@ -45,7 +45,7 @@ const checkRef = async (payload: string, user: UserEntity) => {
     const refLink = await ReferralLinksRepository.findOneBy({ param: inviterUuid })
 
     if (refLink) {
-      if (refsCount > refLink.count) {
+      if (refsCount >= refLink.count) {
         return false
       }
     } else {

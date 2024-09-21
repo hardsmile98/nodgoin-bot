@@ -54,6 +54,15 @@ const checkRef = async (payload: string, user: UserEntity) => {
       }
     }
 
+    const refFinded = await ReferralsRepository.findBy({
+      user_id: inviter.id,
+      referral_id: user.id
+    })
+
+    if (refFinded) {
+      return false
+    }
+
     const newRef = ReferralsRepository.create({
       user_id: inviter.id,
       referral_id: user.id

@@ -31,11 +31,7 @@ const start = () => async (ctx: Context) => {
 
       if ('payload' in ctx && typeof ctx.payload === 'string') {
         if (ctx.payload.includes('ref_')) {
-          const isAvtivated = await checkRef(ctx.payload, user)
-
-          if (isAvtivated) {
-            // activate user
-          }
+          await checkRef(ctx.payload, user)
         }
 
         if (ctx.payload.includes('squad_')) {

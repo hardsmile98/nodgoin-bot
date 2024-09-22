@@ -27,8 +27,6 @@ const start = () => async (ctx: Context) => {
         user = await UserRepository.save(newUser)
       }
 
-      console.log(user.id)
-
       if (!user.image) {
         downloadAvatar(ctx, user)
       }

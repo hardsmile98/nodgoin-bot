@@ -18,7 +18,7 @@ const createSquad = () => async (ctx: Context) => {
         const userSquad = await SquadRepository.findOneBy({ owner: user.id })
 
         if (userSquad) {
-          return await ctx.reply('You can create no more than 1 squad')
+          return await ctx.telegram.sendMessage(user.telegram_id, '🛑 You can create no more than 1 squad')
         }
 
         const chatId = ctx.update.my_chat_member.chat.id

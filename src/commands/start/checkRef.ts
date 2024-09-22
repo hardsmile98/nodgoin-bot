@@ -12,7 +12,7 @@ const checkRef = async (payload: string, user: UserEntity) => {
   const inviterUuid = payload.split('_')?.[1]
 
   if (user.id === inviterUuid) {
-    return false
+    return
   }
 
   /*
@@ -46,10 +46,6 @@ const checkRef = async (payload: string, user: UserEntity) => {
 
     if (refLink) {
       if (refsCount >= refLink.count) {
-        return false
-      }
-    } else {
-      if (refsCount >= 3) {
         return false
       }
     }

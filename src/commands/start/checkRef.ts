@@ -42,7 +42,7 @@ const checkRef = async (payload: string, user: UserEntity) => {
 
     await ReferralsRepository.save(newRef)
 
-    const refType = refLink && refLink.count < refsCount
+    const refType = refLink && refsCount < refLink.count
       ? inviter.ref_type
       : RefType.INITIAL
 

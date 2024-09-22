@@ -20,17 +20,18 @@ const checkRef = async (payload: string, user: UserEntity) => {
   * Если uuid - то ссылка другого пользователя
   */
   if (Number.isInteger(+inviterUuid)) {
-    const count = await RefRepository.countBy({ user_id: +inviterUuid })
-
     const refLink = await ReferralLinksRepository.findOneBy({ param: inviterUuid })
 
     if (!refLink) {
       return false
     }
 
-    if (count >= refLink.count) {
-      return false
-    }
+    const newRef = RefRepository.create({
+      user_id: +inviterUuid,
+      ref_id: user.telegram_id
+    })
+
+    await RefRepository.save(newRef)
 
     return true
   } else {
@@ -50,7 +51,7 @@ const checkRef = async (payload: string, user: UserEntity) => {
       }
     }
 
-    const refFinded = await ReferralsRepository.findBy({
+    const refFinded = await ReferralsRepository.findOneBy({
       user_id: inviter.id,
       referral_id: user.id
     })

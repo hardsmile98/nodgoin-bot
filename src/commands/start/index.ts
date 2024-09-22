@@ -20,11 +20,14 @@ const start = () => async (ctx: Context) => {
           last_name: ctx.from.last_name,
           is_premium: ctx.from.is_premium,
           telegram_id: ctx.from.id,
+          balance: 1_000,
           reg_date: new Date().getTime().toString()
         })
 
         user = await UserRepository.save(newUser)
       }
+
+      console.log(user.id)
 
       if (!user.image) {
         downloadAvatar(ctx, user)

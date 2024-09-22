@@ -1,4 +1,4 @@
-import { ReferralLinksRepository, ReferralsRepository, RefRepository, UserRepository } from '../../db'
+import { ReferralLinksRepository, ReferralsRepository, UserRepository } from '../../db'
 import type UserEntity from '../../db/entity/user.entity'
 import { RefType } from '../../db/entity/user.entity'
 
@@ -15,26 +15,7 @@ const checkRef = async (payload: string, user: UserEntity) => {
     return
   }
 
-  /*
-  * Если ссылка число, то это просто ссылка для регистрации
-  * Если uuid - то ссылка другого пользователя
-  */
-  if (Number.isInteger(+inviterUuid)) {
-    const refLink = await ReferralLinksRepository.findOneBy({ param: inviterUuid })
-
-    if (!refLink) {
-      return false
-    }
-
-    const newRef = RefRepository.create({
-      user_id: +inviterUuid,
-      ref_id: user.telegram_id
-    })
-
-    await RefRepository.save(newRef)
-
-    return true
-  } else {
+  if (!Number.isInteger(+inviterUuid)) {
     const inviter = await UserRepository.findOneBy({ id: inviterUuid })
 
     if (!inviter) {

@@ -26,12 +26,6 @@ const checkRef = async (payload: string, user: UserEntity) => {
 
     const refLink = await ReferralLinksRepository.findOneBy({ param: inviterUuid })
 
-    if (refLink) {
-      if (refsCount >= refLink.count) {
-        return false
-      }
-    }
-
     const refFinded = await ReferralsRepository.findOneBy({
       user_id: inviter.id,
       referral_id: user.id
@@ -48,7 +42,11 @@ const checkRef = async (payload: string, user: UserEntity) => {
 
     await ReferralsRepository.save(newRef)
 
-    const bonus = bonusForInvite[inviter.ref_type]
+    const refType = refLink && refLink.count < refsCount
+      ? inviter.ref_type
+      : RefType.INITIAL
+
+    const bonus = bonusForInvite[refType]
 
     inviter.balance = inviter.balance + bonus
     await UserRepository.save(inviter)

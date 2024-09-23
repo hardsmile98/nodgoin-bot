@@ -12,9 +12,6 @@ class UserEntity {
     id: string
 
   @Column({ length: 60, nullable: true })
-    username: string
-
-  @Column({ length: 60, nullable: true })
     first_name: string
 
   @Column({ length: 60, nullable: true })

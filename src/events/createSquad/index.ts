@@ -36,7 +36,7 @@ const createSquad = () => async (ctx: Context) => {
 
           const pathOnServer = isDev
             ? path.resolve(__dirname, '../../../images', `${chatId.toString()}.png`)
-            : `/var/www/nodgoin_data/chat_photos/chat_${user.telegram_id}.png`
+            : `/var/www/nodgoin_data/chat_photos/chat_${chatId}.png`
 
           try {
             await downloadImage(url.href, pathOnServer)

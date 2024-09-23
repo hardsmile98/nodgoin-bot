@@ -19,6 +19,7 @@ const start = () => async (ctx: Context) => {
           last_name: ctx.from.last_name,
           is_premium: ctx.from.is_premium,
           telegram_id: ctx.from.id,
+          username: ctx.from.username,
           balance: 1_000,
           reg_date: new Date().getTime().toString()
         })

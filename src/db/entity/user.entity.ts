@@ -11,10 +11,13 @@ class UserEntity {
   @PrimaryGeneratedColumn('uuid')
     id: string
 
-  @Column({ length: 60, nullable: true })
+  @Column({ length: 128, nullable: true })
     first_name: string
 
-  @Column({ length: 60, nullable: true })
+  @Column({ length: 128, nullable: true })
+    username: string
+
+  @Column({ length: 128, nullable: true })
     last_name: string
 
   @Column({ type: 'bigint', default: 0 })

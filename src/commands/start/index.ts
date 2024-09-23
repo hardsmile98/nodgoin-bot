@@ -15,7 +15,6 @@ const start = () => async (ctx: Context) => {
 
       if (!user) {
         const newUser = UserRepository.create({
-          username: ctx.from.username,
           first_name: ctx.from.first_name,
           last_name: ctx.from.last_name,
           is_premium: ctx.from.is_premium,

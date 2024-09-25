@@ -11,6 +11,9 @@ class SquadEntity {
   @Column({ nullable: true })
     image: string
 
+  @Column({ nullable: true })
+    username: string
+
   @Column({ type: 'uuid', nullable: true })
     owner: string
 

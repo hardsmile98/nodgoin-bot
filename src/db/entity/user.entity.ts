@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm'
 
 export enum RefType {
   INITIAL = 'initial',
@@ -20,7 +20,8 @@ class UserEntity {
   @Column({ length: 128, nullable: true })
     last_name: string
 
-  @Column({ type: 'bigint', default: 0 })
+  @Index({ unique: true })
+  @Column({ type: 'bigint', default: 0, unique: true })
     telegram_id: number
 
   @Column({ default: false })

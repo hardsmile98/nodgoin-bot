@@ -1,4 +1,4 @@
-import { ReferralLinksRepository, ReferralsRepository, UserRepository } from '../../db'
+import { ReferralsRepository, UserRepository } from '../../db'
 import type UserEntity from '../../db/entity/user.entity'
 import { RefType } from '../../db/entity/user.entity'
 
@@ -22,10 +22,6 @@ const checkRef = async (payload: string, user: UserEntity) => {
       return false
     }
 
-    const refsCount = await ReferralsRepository.countBy({ user_id: inviter.id })
-
-    const refLink = await ReferralLinksRepository.findOneBy({ param: inviterUuid })
-
     const refFinded = await ReferralsRepository.findOneBy({
       user_id: inviter.id,
       referral_id: user.id
@@ -42,11 +38,7 @@ const checkRef = async (payload: string, user: UserEntity) => {
 
     await ReferralsRepository.save(newRef)
 
-    const refType = refLink && refsCount < refLink.count
-      ? inviter.ref_type
-      : RefType.INITIAL
-
-    const bonus = bonusForInvite[refType]
+    const bonus = bonusForInvite[inviter.ref_type]
 
     inviter.balance = inviter.balance + bonus
     await UserRepository.save(inviter)

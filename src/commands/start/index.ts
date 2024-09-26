@@ -11,9 +11,13 @@ const start = () => async (ctx: Context) => {
     if (ctx.has(message('text'))) {
       let user: UserEntity | null
 
+      let isNewUser: boolean = false
+
       user = await UserRepository.findOneBy({ telegram_id: ctx.from.id })
 
       if (!user) {
+        isNewUser = true
+
         const newUser = UserRepository.create({
           first_name: ctx.from.first_name,
           last_name: ctx.from.last_name,
@@ -32,7 +36,7 @@ const start = () => async (ctx: Context) => {
       }
 
       if ('payload' in ctx && typeof ctx.payload === 'string') {
-        if (ctx.payload.includes('ref_')) {
+        if (ctx.payload.includes('ref_') && isNewUser) {
           await checkRef(ctx.payload, user)
         }
 

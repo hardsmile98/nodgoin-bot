@@ -24,7 +24,6 @@ const checkRef = async (payload: string, user: UserEntity) => {
       }
 
       const refFinded = await ReferralsRepository.findOneBy({
-        user_id: inviter.id,
         referral_id: user.id
       })
 

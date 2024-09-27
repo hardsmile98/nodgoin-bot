@@ -44,7 +44,19 @@ const start = () => async (ctx: Context) => {
           const squad = await checkSquad(ctx.payload, user)
 
           if (squad) {
-            return await ctx.reply(`🚩 You have joined the squad ${squad.name}`)
+            return await ctx.reply(`🚩 You have joined the squad ${squad.name}`, {
+              reply_markup: {
+                resize_keyboard: true,
+                inline_keyboard: [
+                  [{
+                    text: 'Play',
+                    web_app: {
+                      url: process.env.APP_LINK ?? ''
+                    }
+                  }]
+                ]
+              }
+            })
           }
         }
       }

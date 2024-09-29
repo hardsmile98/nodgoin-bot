@@ -70,9 +70,6 @@ class UserEntity {
     last_visit: Date
 
   @Column({ default: new Date() })
-    end_session: Date
-
-  @Column({ default: new Date() })
     boosts_restored: Date
 
   @Column({ type: 'uuid', nullable: true })
@@ -86,6 +83,12 @@ class UserEntity {
 
   @Column({ length: 250, nullable: true })
     image: string
+
+  @Column({ default: 0 })
+    daily_strick_days: number
+
+  @Column({ nullable: true })
+    daily_reward_date: Date
 
   @Column({
     type: 'enum',

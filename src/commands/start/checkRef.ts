@@ -40,7 +40,10 @@ const checkRef = async (payload: string, user: UserEntity) => {
 
       const bonus = bonusForInvite[inviter.ref_type]
 
+      const newTickets = inviter.tickets + 2
+
       inviter.balance = inviter.balance + bonus
+      inviter.tickets = newTickets > 100 ? 100 : newTickets
       await UserRepository.save(inviter)
 
       user.balance = user.balance + bonus

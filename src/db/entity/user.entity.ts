@@ -72,6 +72,9 @@ class UserEntity {
   @Column({ default: new Date() })
     boosts_restored: Date
 
+  @Column({ default: 0 })
+    number_of_tickets_purchased: number
+
   @Column({ type: 'uuid', nullable: true })
     invited: string
 
@@ -83,6 +86,9 @@ class UserEntity {
 
   @Column({ length: 250, nullable: true })
     image: string
+
+  @Column({ default: 0 })
+    tickets: number
 
   @Column({ default: 0 })
     daily_strick_days: number
